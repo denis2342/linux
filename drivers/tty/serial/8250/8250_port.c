@@ -2168,7 +2168,7 @@ int serial8250_do_startup(struct uart_port *port)
 		serial_port_out(port, UART_LCR, 0);
 		serial_icr_write(up, UART_CSR, 0); /* Reset the UART */
 		serial_port_out(port, UART_LCR, UART_LCR_CONF_MODE_B);
-		serial_port_out(port, UART_EFR, UART_EFR_ECB);
+		serial_port_out(port, UART_EFR, UART_EFR_ECB | UART_EFR_RTS | UART_EFR_CTS);
 		serial_port_out(port, UART_LCR, 0);
 	}
 
