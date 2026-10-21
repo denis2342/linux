@@ -197,9 +197,14 @@ enum commands {
 
 
 struct i596_reg {
-	unsigned short porthi;
-	unsigned short portlo;
-	unsigned long ca;
+	/*
+	 * The chip requires two separate 16-bit write cycles per port
+	 * command; without volatile the compiler may merge them into one
+	 * 32-bit access and the command is silently lost.
+	 */
+	volatile unsigned short porthi;
+	volatile unsigned short portlo;
+	volatile unsigned long ca;
 };
 
 #define EOF		0x8000
